@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# Provision the vagrant environment
+
+
+# Setup PHP
+echo "Setup PHP"
+phpenv local 5.5
+
+# Install PHP dependancies
+echo "Install PHP dependancies"
+composer install --no-interaction  --prefer-dist
+
+# Setup Node
+echo "Setup Node"
+nvm install 6.2
+nvm use 6.2
+
+# Install dependancies for running your tests or other tasks
+echo "Install dependancies"
+npm install -g grunt-cli
+npm install -g bower
+
+# Setup Theme
+#echo "Setup Parent Theme"
+#npm install --prefix ./html/app/themes/tm-events-2016/
+#cd ./html/app/themes/tm-events-2016/
+#bower install
+#grunt dev
+#cd ~/clone

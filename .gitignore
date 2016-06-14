@@ -1,0 +1,75 @@
+# Nottingham Sports Awards
+
+## Development
+_assets
+config/environments/development.php
+
+## System
+
+error_log
+.DS_Store
+
+## Server
+
+.env
+/shared/*
+error.log
+access.log
+
+## Development
+
+bin
+.vagrant
+vendor/*
+
+## PHP
+composer.lock
+
+## NodeJS
+
+node_modules/
+npm-debug.log
+
+## WordPress
+
+html/wp/*
+html/media/*
+
+!html/media/index.php
+
+### Languages
+html/app/languages/*
+
+#### White-list Languages
+!html/app/languages/index.php
+
+### Plugins
+html/app/db.php
+html/app/plugins/*
+html/app/plugins-mu/*
+
+#### White-list Plugins
+!html/app/plugins/index.php
+!html/app/plugins/tm-hero.php
+!html/app/plugins/nsa-entries-2016.php
+!html/app/plugins-mu/index.php
+!html/app/plugins-mu/cmb2.php
+!html/app/plugins-mu/hm-gtm.php
+!html/app/plugins-mu/ti-security.php
+!html/app/plugins-mu/ti-roles-and-capabilities.php
+!html/app/plugins-mu/ti-core-functions.php
+!html/app/plugins-mu/ti-widgets.php
+!html/app/plugins-mu/ti-wordpress-seo.php
+!html/app/plugins-mu/tm-events-awards.php
+!html/app/plugins-mu/tm-events-partners.php
+!html/app/plugins-mu/tm-events-entries.php
+!html/app/plugins-mu/tm-events-options.php
+
+### Themes
+.sass-cache
+html/app/themes/*
+
+#### White-list Themes
+!html/app/themes/index.php
+!html/app/themes/tm-events-2016/
+!html/app/themes/nsa-2016/
