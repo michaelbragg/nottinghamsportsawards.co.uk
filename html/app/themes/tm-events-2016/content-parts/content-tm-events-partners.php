@@ -46,7 +46,7 @@ $associated_award = get_post_meta( get_the_ID(), '_tm_events_partners_associated
 
 		<aside class="block__aside sponsors-item__aside box grid ss1-ss4 ls1-ls4">
 			<?php if ( $profile_image ) : ?>
-				<?php wp_get_attachment_image( $profile_image, 'profile', false, array( 'class' => 'image__responsive' ) ); ?>
+				<?php echo wp_get_attachment_image( $profile_image, 'profile', false, array( 'class' => 'image__responsive box' ) ); ?>
 			<?php endif; ?>
 			<p>
 				<?php if ( has_post_thumbnail() ) : ?>
