@@ -8,4 +8,4 @@ echo "Installing coding standards..."
 
 # Run tests
 echo "Running WordPress PHP Coding Standards test"
-./vendor/bin/phpcs --standard="WordPress" html/app/themes/ --extensions="php" --ignore="index.php,node_modules/,twentysixteen/"
+./vendor/bin/phpcs --standard="WordPress" html/app/themes/ --extensions="php" --ignore="index.php,node_modules/,twentysixteen/,tm-events-2016"
