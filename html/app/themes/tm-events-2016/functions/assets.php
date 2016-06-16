@@ -72,7 +72,7 @@ function tm_events_2016_register_styles() {
 
 	// Default WordPress stylesheet.
 	wp_register_style(
-		'tm-events-2016-style',
+		'tm-events-2016',
 		get_stylesheet_uri(),
 		array(),
 		'0.2.0'
@@ -111,7 +111,7 @@ add_action(
  */
 function tm_events_2016_styles_load_global() {
 	// Styles to be loaded globally.
-	wp_enqueue_style( 'tm-events-2016-style' );
+	wp_enqueue_style( 'tm-events-2016' );
 }
 
 add_action(
