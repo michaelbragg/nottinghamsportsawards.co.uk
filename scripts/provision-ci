@@ -22,9 +22,9 @@ npm install -g grunt-cli
 npm install -g bower
 
 # Setup Theme
-#echo "Setup Parent Theme"
-#npm install --prefix ./html/app/themes/tm-events-2016/
-#cd ./html/app/themes/tm-events-2016/
-#bower install
-#grunt dev
-#cd ~/clone
+echo "Setup Parent Theme"
+npm install --prefix ./html/app/themes/tm-events-2016/
+cd ./html/app/themes/tm-events-2016/
+bower install
+grunt dev
+cd ~/clone
