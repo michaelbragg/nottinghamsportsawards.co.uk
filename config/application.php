@@ -78,11 +78,18 @@ define( 'WP_POST_REVISIONS', 3 );
 define( 'AUTOSAVE_INTERVAL', 120 );
 define( 'WP_MEMORY_LIMIT', '96M' );
 define( 'WP_DEFAULT_THEME', getenv( 'DEFAULT_THEME' ) ?: 'twentysixteen' );
+define( 'WPLANG', getenv( 'WPLANG' ) ?: 'en_GB' );
 
 /**
  * Allow WordPress Multisite
  */
 define( 'WP_ALLOW_MULTISITE', getenv( 'WP_ALLOW_MULTISITE' ) ?: false );
+define( 'MULTISITE', true );
+define( 'SUBDOMAIN_INSTALL', false );
+define( 'DOMAIN_CURRENT_SITE', getenv( 'DOMAIN_CURRENT_SITE' ) );
+define( 'PATH_CURRENT_SITE', '/' );
+define( 'SITE_ID_CURRENT_SITE', 1 );
+define( 'BLOG_ID_CURRENT_SITE', 1 );
 
 /**
  * Drop-ins
