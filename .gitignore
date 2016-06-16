@@ -72,4 +72,4 @@ html/app/themes/*
 #### White-list Themes
 !html/app/themes/index.php
 !html/app/themes/tm-events-2016/
-!html/app/themes/nsa-2016/
+!html/app/themes/tm-nsa-2016/

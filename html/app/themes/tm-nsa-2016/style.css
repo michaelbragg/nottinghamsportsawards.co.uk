@@ -1,0 +1,101 @@
+/*!
+ * Theme Name:		Nottingham Sports Awards 2016
+ * Theme URI:
+ * Description:
+ * Author:				Trinity Mirror Creative
+ * Author URI:		http://www.trinitymirror.com
+ * Template:			tm-events-2016
+ * Version:				0.1.0
+ * License:				GNU General Public License v2 or later
+ * License URI:		http://www.gnu.org/licenses/gpl-2.0.html
+ * Tags:
+ * Text Domain:		nsa-2016
+ */
+
+/**
+ * Brand Colours
+ *
+ * green-light: rgb(44,160,80)
+ * green: rgb(23,84,42)
+ * green-dark: rgb(16,58,29)
+ *
+ * orange-light: rgb(244,152,108)
+ * orange: rgb(242,101,34)
+ * orange-dark: rgb(216,90,30)
+ *
+ * red-light: #D16369
+ * red: #c8232b
+ * red-dark: #480D10
+ *
+ * blue-light:rgb(60,101,112)
+ * blue: rgb(21,60,71)
+ * blue-dark: rgb(8,40,49)
+ *
+ * black: rgb(51,51,51)
+ * grey-dark: rgb(68,68,68)
+ * grey: rgb(204,204,204)
+ * grey-light: rgb(183,192,197)
+ * white: rgb(255,255,255)
+ *
+ *
+ */
+
+a:link,
+a:visited,
+a:active {
+	color: rgb(23,84,42);
+}
+
+a:hover {
+	color: rgb(44,160,80);
+}
+
+.heading--main {
+	border-top-color: rgb(23,84,42);
+}
+
+.heading--sub {
+	border-top-color: rgb(242,101,34);
+}
+
+	.heading--sub--other {
+		border-top-color: rgb(253,215,62);
+	}
+
+	.heading--sub--professional {
+		border-top-color: rgb(0,159,227);
+	}
+
+	.heading--sub--amateur {
+		border-top-color: rgb(232,23,57);
+	}
+
+/**
+ * Header
+ */
+
+.header__main {
+	border-bottom: 2px solid rgb(16,58,29);
+	background-color: rgb(23,84,42);
+	background-image: -moz-linear-gradient(top, rgb(44,160,80) 0, rgb(23,84,42) 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(44,160,80)), color-stop(100%, rgb(23,84,42)));
+	background-image: -webkit-linear-gradient(top, rgb(44,160,80) 0, rgb(23,84,42) 100%);
+	background-image: -o-linear-gradient(top, rgb(44,160,80) 0, rgb(23,84,42) 100%);
+	background-image: -ms-linear-gradient(top, rgb(44,160,80) 0, rgb(23,84,42) 100%);
+	background-image: linear-gradient(to bottom, rgb(44,160,80) 0, rgb(23,84,42) 100%);
+ }
+
+.footer__main {
+	background-color: rgb(204,204,204);
+}
+
+.nav__main li:hover a,
+.nav__main li:focus a {
+	background-color: rgb(242,101,34);
+	background-image: -moz-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(244,152,108)), color-stop(100%, rgb(242,101,34)));
+	background-image: -webkit-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
+	background-image: -o-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
+	background-image: -ms-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
+	background-image: linear-gradient(to bottom, rgb(244,152,108) 0, rgb(242,101,34) 100%);
+ }
