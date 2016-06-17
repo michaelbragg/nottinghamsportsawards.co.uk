@@ -99,3 +99,7 @@ a:hover {
 	background-image: -ms-linear-gradient(top, rgb(68,68,68) 0, rgb(51,51,51) 100%);
 	background-image: linear-gradient(to bottom, rgb(68,68,68) 0, rgb(51,51,51) 100%);
  }
+
+.hero {
+	border-bottom-color: rgb(23,84,42);
+}
