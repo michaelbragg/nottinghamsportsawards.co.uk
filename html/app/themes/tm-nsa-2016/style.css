@@ -43,11 +43,11 @@
 a:link,
 a:visited,
 a:active {
-	color: rgb(23,84,42);
+	color: rgb(44,160,80);
 }
 
 a:hover {
-	color: rgb(44,160,80);
+	color: rgb(16,58,29);
 }
 
 .heading--main {
@@ -91,11 +91,11 @@ a:hover {
 
 .nav__main li:hover a,
 .nav__main li:focus a {
-	background-color: rgb(242,101,34);
-	background-image: -moz-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(244,152,108)), color-stop(100%, rgb(242,101,34)));
-	background-image: -webkit-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
-	background-image: -o-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
-	background-image: -ms-linear-gradient(top, rgb(244,152,108) 0, rgb(242,101,34) 100%);
-	background-image: linear-gradient(to bottom, rgb(244,152,108) 0, rgb(242,101,34) 100%);
+	background-color: rgb(68,68,68);
+	background-image: -moz-linear-gradient(top, rgb(68,68,68) 0, rgb(51,51,51) 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(68,68,68)), color-stop(100%, rgb(51,51,51)));
+	background-image: -webkit-linear-gradient(top, rgb(68,68,68) 0, rgb(51,51,51) 100%);
+	background-image: -o-linear-gradient(top, rgb(68,68,68) 0, rgb(51,51,51) 100%);
+	background-image: -ms-linear-gradient(top, rgb(68,68,68) 0, rgb(51,51,51) 100%);
+	background-image: linear-gradient(to bottom, rgb(68,68,68) 0, rgb(51,51,51) 100%);
  }
