@@ -156,7 +156,7 @@ class TM_NSA_2016_Theme {
 		$theme_assets = new TM_NSA_2016_Assets( $this->theme_name, $this->version );
 		$this->loader->add_action( 'wp_loaded', $theme_assets, 'register_styles', 1 );
 		$this->loader->add_action( 'wp_enqueue_scripts', $theme_assets, 'enqueue_global_styles', 100 );
-		$this->loader->add_action( 'login_enqueue_scripts', $theme_assets, 'admin_login_branding', 10 );
+		$this->loader->add_action( 'login_enqueue_scripts', $this, 'admin_login_branding', 10 );
 	}
 
 	/**
