@@ -14,48 +14,42 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+<div id="content" class="content-area box__large wrapper__sub cf">
+	<main id="main" class="content__main ss1-ss4 ms1-ms6 ls1-ls8 separator">
+	<?php
+	if ( have_posts() ) : ?>
 
-		<main id="main" class="box__large content__main wrapper cf">
-		  <div class="wrapper__sub">
-		    <article class="content__main ss1-ss4 ms1-ms6 ls1-ls8 separator">
-				<?php
-				if ( have_posts() ) : ?>
+		<header>
+			<h1 class="heading--main page-title screen-reader-text"><?php single_post_title(); ?></h1>
+		</header>
 
-								<header>
-									<h1 class="heading--main page-title screen-reader-text"><?php single_post_title(); ?></h1>
-								</header>
+		<?php
+		// Start the Loop.
+		while ( have_posts() ) : the_post();
 
-							<?php
-							/* Start the Loop */
-							while ( have_posts() ) : the_post();
+			/*
+			 * Include the Post-Format-specific template for the content.
+			 * If you want to override this in a child theme, then include a file
+			 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+			 */
+			get_template_part( 'content-parts/content', get_post_format() );
 
-								/*
-								 * Include the Post-Format-specific template for the content.
-								 * If you want to override this in a child theme, then include a file
-								 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-								 */
-								get_template_part( 'content-parts/content', get_post_format() );
+		endwhile;
 
-							endwhile;
+		the_posts_navigation();
 
-							the_posts_navigation();
+	else :
 
-		else :
+		get_template_part( 'content-parts/content', 'none' );
 
-			get_template_part( 'content-parts/content', 'none' );
+	endif; ?>
+	</main>
 
-		endif; ?>
-		    </article>
+	<aside id="secondary" class="content__aside widget-area ss1-ss4 ms1-ms6 ls9-ls12">
+		<?php get_sidebar(); ?>
+	</aside>
 
-		    <aside id="secondary" class="content__aside widget-area ss1-ss4 ms1-ms6 ls9-ls12">
-				<?php get_sidebar(); ?>
-		    </aside>
-
-		  </div>
-		</main>
-
-	</div><!-- #primary -->
+</div>
 
 <?php
 
