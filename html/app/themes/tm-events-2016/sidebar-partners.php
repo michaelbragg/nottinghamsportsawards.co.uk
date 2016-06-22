@@ -47,35 +47,27 @@ $supporter_array = new WP_Query(
 
 ?>
 
-<section class="wrapper partners-bar box__large c cf">
+<aside class="wrapper partners-bar box__large c cf">
 
 	<div class="wrapper__sub">
 
 <?php if ( $associate_array->have_posts() ) : ?>
 		<section class="grid ss1-ss4 ms1-6 ls1-ls4">
-
-	<!-- pagination here -->
-	<h3 class="gamma heading--sub">In association with:</h3>
-
-	<!-- the loop -->
-	<?php while ( $associate_array->have_posts() ) : $associate_array->the_post(); ?>
-		<?php if ( has_post_thumbnail() ) : ?>
-		<a href="<?php echo esc_url( get_permalink() ); ?>">
-			<?php the_post_thumbnail(
-				'logo-partner',
-				array(
-					'class' => 'image__responsive',
-				)
-			); ?>
-		</a>
-		<?php endif; ?>
-	<?php endwhile; ?>
-	<!-- end of the loop -->
-
-	<!-- pagination here -->
-
-	<?php wp_reset_postdata(); ?>
-	</section>
+		<h3 class="gamma heading--sub">In association with:</h3>
+		<?php while ( $associate_array->have_posts() ) : $associate_array->the_post(); // Start loop.  ?>
+			<?php if ( has_post_thumbnail() ) : ?>
+			<a href="<?php echo esc_url( get_permalink() ); ?>">
+				<?php the_post_thumbnail(
+					'logo-partner',
+					array(
+						'class' => 'image__responsive',
+					)
+				); ?>
+			</a>
+			<?php endif; ?>
+		<?php endwhile; // End loop.?>
+		<?php wp_reset_postdata(); ?>
+		</section>
 
 <?php endif; ?>
 
@@ -103,4 +95,4 @@ $supporter_array = new WP_Query(
 <?php endif; ?>
 	</div><!--/ wrapper__sub  -->
 
-</section>
+</aside>

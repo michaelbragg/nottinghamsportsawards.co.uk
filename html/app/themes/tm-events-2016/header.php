@@ -54,14 +54,12 @@
 
 <?php
 
-if ( ! function_exists( 'tm_hero_has_hero' ) || ! tm_hero_has_hero() ) :
-	return;
-else : ?>
+if ( function_exists( 'tm_hero_has_hero' ) && tm_hero_has_hero() ) : ?>
 <section class="hero wrapper box__large hero--image" style="<?php tm_hero_the_image(); ?>">
 
-	<article class="wrapper__sub">
+	<div class="wrapper__sub">
 
-		<div class="hero__content">
+		<header class="hero__content">
 
 			<?php if ( tm_hero_has_field( 'tagline' ) ) { ?>
 			<?php tm_hero_the_tagline( '<h4 class="hero__copy gamma">', '</h4>' ); ?>
@@ -73,9 +71,9 @@ else : ?>
 			</a>
 <?php } ?>
 
-		</div>
+		</header>
 
-	</article>
+	</div>
 
 </section>
 <?php endif; ?>
