@@ -78,4 +78,4 @@ if ( function_exists( 'tm_hero_has_hero' ) && tm_hero_has_hero() ) : ?>
 </section>
 <?php endif; ?>
 
-	<div id="content" class="site-content">
+<div id="content" class=" box__large wrapper__sub cf">

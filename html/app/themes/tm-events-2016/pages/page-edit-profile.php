@@ -1,5 +1,9 @@
 <?php
-/* Template Name: Edit Profile */
+/**
+ * Template Name: Edit Profile
+ *
+ * @package tm-events-2016
+ */
 
 if ( ! is_user_logged_in() ) {
 	wp_redirect( home_url( $path = 'login' ) );
@@ -34,11 +38,12 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_PO
 	if ( ! empty( $_POST['last-name'] ) ) {
 		update_user_meta( $current_user->ID, 'last_name', esc_attr( $_POST['last-name'] ) ); }
 
-	/*
-	Redirect so the page will show updated info.*/
-	/*I am not Author of this Code- i dont know why but it worked for me after changing below line to if ( count($error) == 0 ){ */
+	// Redirect so the page will show updated info.
+	/**
+	 * I am not Author of this Code- i dont know why but it worked for me after changing below line to if ( count($error) == 0 ){
+	 */
 	if ( count( $error ) == 0 ) {
-		// action hook for plugins and extra fields saving
+		// Action hook for plugins and extra fields saving.
 		do_action( 'edit_user_profile_update', $current_user->ID );
 		wp_redirect( get_permalink() );
 		exit;
@@ -47,49 +52,47 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_PO
 
 get_header(); ?>
 
-<div id="primary" class="content-area">
-	<main id="content" class="content__main wrapper cf">
-	  <div class="wrapper__sub">
-	    <article class="ss1-ss4 ms1-ms6 ls1-ls12">
+<main id="main" class="content__main ss1-ss4 ms1-ms6 ls1-ls12 cf">
+
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 	<div id="post-<?php the_ID(); ?>">
 		<div class="entry-content entry">
 			<?php the_content(); ?>
 			<?php if ( ! is_user_logged_in() ) : ?>
 					<p class="warning">
-						<?php _e( 'You must be logged in to edit your profile.', 'tm-events-2016' ); ?>
+						<?php esc_html_e( 'You must be logged in to edit your profile.', 'tm-events-2016' ); ?>
 					</p><!-- .warning -->
 			<?php else : ?>
 				<?php if ( count( $error ) > 0 ) { echo '<p class="error">' . implode( '<br />', $error ) . '</p>'; } ?>
 				<form method="post" id="adduser" action="<?php the_permalink(); ?>">
 					<p class="form-username">
-						<label for="first-name"><?php _e( 'First Name', 'tm-events-2016' ); ?></label>
+						<label for="first-name"><?php esc_html_e( 'First Name', 'tm-events-2016' ); ?></label>
 						<input class="text-input" name="first-name" type="text" id="first-name" value="<?php the_author_meta( 'first_name', $current_user->ID ); ?>" />
 					</p><!-- .form-username -->
 					<p class="form-username">
-						<label for="last-name"><?php _e( 'Last Name', 'tm-events-2016' ); ?></label>
+						<label for="last-name"><?php esc_html_e( 'Last Name', 'tm-events-2016' ); ?></label>
 						<input class="text-input" name="last-name" type="text" id="last-name" value="<?php the_author_meta( 'last_name', $current_user->ID ); ?>" />
 					</p><!-- .form-username -->
 					<p class="form-email">
-						<label for="email"><?php _e( 'E-mail *', 'tm-events-2016' ); ?></label>
+						<label for="email"><?php esc_html_e( 'E-mail *', 'tm-events-2016' ); ?></label>
 						<input class="text-input" name="email" type="text" id="email" value="<?php the_author_meta( 'user_email', $current_user->ID ); ?>" />
 					</p><!-- .form-email -->
 					<p class="form-password">
-						<label for="pass1"><?php _e( 'Password *', 'tm-events-2016' ); ?> </label>
+						<label for="pass1"><?php esc_html_e( 'Password *', 'tm-events-2016' ); ?> </label>
 						<input class="text-input" name="pass1" type="password" id="pass1" />
 					</p><!-- .form-password -->
 					<p class="form-password">
-						<label for="pass2"><?php _e( 'Repeat Password *', 'tm-events-2016' ); ?></label>
+						<label for="pass2"><?php esc_html_e( 'Repeat Password *', 'tm-events-2016' ); ?></label>
 						<input class="text-input" name="pass2" type="password" id="pass2" />
 					</p><!-- .form-password -->
 
 					<?php
-						// action hook for plugin and extra fields
+						// Action hook for plugin and extra fields.
 						do_action( 'edit_user_profile',$current_user );
 					?>
 					<p class="form-submit">
 						<?php echo $referer; ?>
-						<input name="updateuser" type="submit" id="updateuser" class="submit button" value="<?php _e( 'Update', 'tm-events-2016' ); ?>" />
+						<input name="updateuser" type="submit" id="updateuser" class="submit button" value="<?php esc_attr_e( 'Update', 'tm-events-2016' ); ?>" />
 						<?php wp_nonce_field( 'update-user' ) ?>
 						<input name="action" type="hidden" id="action" value="update-user" />
 					</p><!-- .form-submit -->
@@ -100,14 +103,10 @@ get_header(); ?>
 	<?php endwhile; ?>
 <?php else : ?>
 	<p class="no-data">
-		<?php _e( 'Sorry, no page matched your criteria.', 'tm-events-2016' ); ?>
+		<?php esc_html_e( 'Sorry, no page matched your criteria.', 'tm-events-2016' ); ?>
 	</p><!-- .no-data -->
 <?php endif; ?>
 
-	</article>
-	</div>
 </main>
 
-</div><!-- .content-area -->
-
-<?php get_footer(); ?>
+<?php get_footer();

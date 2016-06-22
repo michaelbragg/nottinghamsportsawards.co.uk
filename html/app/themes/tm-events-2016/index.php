@@ -14,7 +14,6 @@
 
 get_header(); ?>
 
-<div class="content-area box__large wrapper__sub cf">
 	<main id="main" class="content__main ss1-ss4 ms1-ms6 ls1-ls8 separator">
 	<?php
 	if ( have_posts() ) : ?>
@@ -48,8 +47,6 @@ get_header(); ?>
 	<aside id="secondary" class="content__aside widget-area ss1-ss4 ms1-ms6 ls9-ls12">
 		<?php get_sidebar(); ?>
 	</aside>
-
-</div>
 
 <?php
 

@@ -9,16 +9,12 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+<main id="main" class="content__main ss1-ss4 ms1-ms6 ls1-ls8 separator">
 
-		<main id="main" class="content__main wrapper cf">
-		  <div class="wrapper__sub">
-		    <article class="ss1-ss4 ms1-ms6 ls1-ls12">
-
-		      <section class="error-404 not-found">
-				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'tm-events-2016' ); ?></h1>
-				</header><!-- .page-header -->
+	<section class="error-404 not-found">
+		<header class="page-header">
+			<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'tm-events-2016' ); ?></h1>
+		</header><!-- .page-header -->
 
 				<div class="page-content">
 					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'tm-events-2016' ); ?></p>
@@ -57,14 +53,15 @@ get_header(); ?>
 						the_widget( 'WP_Widget_Tag_Cloud' );
 					?>
 
-				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
+		</div><!-- .page-content -->
+	</section><!-- .error-404 -->
 
-		    </article>
-		  </div>
-		</main>
+</main>
 
-	</div><!-- #primary -->
+<aside id="secondary" class="content__aside widget-area ss1-ss4 ms1-ms6 ls9-ls12">
+	<?php get_sidebar(); ?>
+</aside>
 
 <?php
+
 get_footer();
