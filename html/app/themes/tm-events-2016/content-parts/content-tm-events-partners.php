@@ -17,14 +17,16 @@ $associated_award = get_post_meta( get_the_ID(), '_tm_events_partners_associated
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'block sponsors-item box grid__separator--horizontal' ); ?>>
 	<header class="entry-header">
-		<h1 class="gamma heading--main entry-title">
 		<?php
-		if ( is_single() ) {
-				the_title();
+		if ( is_single() ) { ?>
+			<h1 class="gamma heading--main entry-title">
+		<?php the_title();
 			if ( ! empty( $associated_award ) ) {
 				echo '-&nbsp;' . esc_html( get_the_title( $associated_award ) );
-			}
-		} else { ?>
+			}?>
+			</h1>
+		<?php } else { ?>
+			<h2 class="gamma heading--main entry-title">
 			<a href="<?php esc_url( get_permalink() ); ?>" rel="bookmark">
 				<?php	the_title(); ?>
 			</a>
@@ -32,8 +34,8 @@ $associated_award = get_post_meta( get_the_ID(), '_tm_events_partners_associated
 			if ( ! empty( $associated_award ) ) {
 				echo '-&nbsp;' . esc_html( get_the_title( $associated_award ) );
 			} ?>
+			</h2>
 		<?php } ?>
-		</h1>
 		<?php if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
 			<?php ctba_2016_posted_on(); ?>
