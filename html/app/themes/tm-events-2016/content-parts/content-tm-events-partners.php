@@ -51,7 +51,7 @@ $associated_award = get_post_meta( get_the_ID(), '_tm_events_partners_associated
 			<p>
 				<?php if ( has_post_thumbnail() ) : ?>
 					<?php if ( $partner_link ) : ?>
-						<a class="outbound link" rel="nofollow" targert="_blank" href="<?php echo esc_html( $partner_link ); ?>">
+						<a class="outbound link" rel="nofollow" target="_blank" href="<?php echo esc_html( $partner_link ); ?>">
 					<?php endif; ?>
 					<?php the_post_thumbnail(
 						'logo-partner',
