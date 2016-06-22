@@ -91,14 +91,11 @@ get_header(); ?>
 		</article><!-- #entry-<?php the_ID(); ?> -->
 
 	<section id="entry-alert" class="alert alert--message alert--type box" role="alert" data-state="hidden">
-		<p>
 		<?php printf(
-			'<strong>%1$s</strong> %2$s</p>',
+			'<p><strong>%1$s</strong> %2$s</p>',
 			esc_html__( 'Info', 'csa-2016' ),
 			esc_html__( 'Entry&rsquo;s are limited to 3 categories.', 'csa-2016' )
 		); ?>
-		</p>
-
 	</section>
 
 <?php endwhile; // End of the loop. ?>
