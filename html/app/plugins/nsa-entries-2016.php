@@ -386,7 +386,7 @@ class NSA_Entries_2016 {
 			"From: Nottingham Sports Awards <no.reply@nottinghamsportsawards.co.uk>\r\n",
 			"Reply-To: Nottingham Sports Awards <no.reply@nottinghamsportsawards.co.uk>\r\n",
 			"Bcc: tmcreative@trinitymirror.com \r\n",
-			"Bcc: vperry@championsukplc.com \r\n",
+			"Bcc: khedge@championsukplc.com \r\n",
 			"Bcc: james.pallatt@nottinghampost.com \r\n",
 			"Content-Type: text/html; charset=UTF-8\r\n",
 		);
