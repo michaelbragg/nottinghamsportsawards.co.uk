@@ -103,3 +103,29 @@ a:hover {
 .hero {
 	border-bottom-color: rgb(23,84,42);
 }
+
+/**
+ * Buttons
+ */
+
+.btn--primary {
+	background-color: rgb(44,160,80); /* Old browsers */
+	background-image: -moz-linear-gradient(top, rgb(44,160,80) 0%, rgb(23,84,42) 100%); /* FF3.6+ */
+	background-image: -webkit-linear-gradient(top, rgb(44,160,80) 0%,rgb(23,84,42) 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top, rgb(44,160,80) 0%,rgb(23,84,42) 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top, rgb(44,160,80) 0%,rgb(23,84,42) 100%); /* IE10+ */
+	background-image: linear-gradient(to bottom, rgb(44,160,80) 0%,rgb(23,84,42) 100%); /* W3C */
+	border-color: rgb(23,84,42);
+}
+
+	.btn--primary:hover,
+	.btn--primary:focus,
+		input.btn--primary:hover,
+		input.btn--primary:focus {
+			background-color: rgb(23,84,42);
+	    background-position: 0 -1em;
+			-webkit-transition:	background-position 0.1s linear;
+			-moz-transition:		background-position 0.1s linear;
+			-o-transition:			background-position 0.1s linear;
+			transition:					background-position 0.1s linear;
+	}
