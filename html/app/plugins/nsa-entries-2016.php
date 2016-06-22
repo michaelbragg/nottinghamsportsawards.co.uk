@@ -131,7 +131,7 @@ class NSA_Entries_2016 {
 			'attributes'				=> array(
 			'placeholder'				=> __( 'I would like to nominate the nominee for this award because&hellip;', 'nsa-entries-2016' ),
 			'required'					=> 'required',
-			'max'								=> 2000,
+			'maxlength'								=> 2000,
 			),
 		) );
 
