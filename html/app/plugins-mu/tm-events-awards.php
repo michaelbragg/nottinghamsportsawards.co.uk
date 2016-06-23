@@ -35,32 +35,35 @@ class TM_Events_Awards {
 			array( $this, 'settings_page' )
 		);
 
-		// @Todo: Check that CM2 is installed
-		add_action(
-			'cmb2_admin_init',
-			array( $this, 'settings_page_fields' )
-		);
-
 		add_action(
 			'pre_get_posts',
 			array( $this, 'change_archive_awards_loop' )
 		);
 
+		if ( defined( 'CMB2_LOADED' ) ) {
+
+			add_action(
+				'cmb2_admin_init',
+				array( $this, 'settings_page_fields' )
+			);
+
+			add_action(
+				'cmb2_init',
+				array( $this, 'metabox_add_partners' )
+			);
+
+		}
 	}
 
 	public function define_constants() {
-		// Path to the child theme directory
-		/*$this->ba_override_constant(
-			'GRD_DIR',
-			get_stylesheet_directory_uri()
-		);*/
-
+		// Path to the child theme directory.
 	}
 
-	public function ba_override_constant( $constant, $value ) {
+	public function override_constant( $constant, $value ) {
 
 		if ( ! defined( $constant ) ) {
-			define( $constant, $value ); // Constants can be overidden via wp-config.php
+			// Constants can be overidden via wp-config.php.
+			define( $constant, $value );
 		}
 
 	}
@@ -173,6 +176,9 @@ class TM_Events_Awards {
 
 	}
 
+	/**
+	 * Settings page for plugin
+	 */
 	public function settings_page() {
 		add_submenu_page(
 			'edit.php?post_type=tm-events-awards',
@@ -250,6 +256,53 @@ class TM_Events_Awards {
 			$query->set( 'orderby', 'menu_order' );
 		}
 	}
+
+	/**
+	 * [metabox_add_award description]
+	 */
+	public function metabox_add_partners() {
+
+		$metabox_award = new_cmb2_box( array(
+			'id'								=> $this->meta_prefix . 'award',
+			'title'							=> __( 'Associated Partner', 'tm-events-awards' ),
+			'object_types'			=> array( 'tm-events-awards' ),
+			'context'						=> 'side',
+			'priority'					=> 'low',
+			'show_names'				=> 'true',
+		) );
+
+		$metabox_award->add_field( array(
+			'id'								=> $this->meta_prefix . 'associated_partner',
+			'title'							=> __( 'Associated Award', 'tm-events-awards' ),
+			'description'				=> __( 'Choose the award associated with this partner.', 'tm-events-awards' ),
+			'type'							=> 'select',
+			'show_option_none' => true,
+			'default'          => 'none',
+			'show_names' => false,
+			'options_cb' => array( $this, 'get_partners' ),
+		) );
+	}
+
+	/**
+	 * Get a list of all partners
+	 */
+	public function get_partners() {
+		$output = array();
+		$args = array(
+			'post_type' => 'tm-events-partners',
+			'posts_per_page' => 50,
+			'order' => 'ASC',
+			'orderby' => 'menu_order title',
+		);
+		$awards_query = new WP_Query( $args );
+		// Check query is not empty.
+		foreach ( $awards_query->posts as $key ) {
+			$output[ $key->ID ] = $key->post_title;
+		}
+
+		return $output;
+	}
+
 
 	public function print_header_scripts() {
 

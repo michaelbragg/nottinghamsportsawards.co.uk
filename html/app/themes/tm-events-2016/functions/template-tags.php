@@ -208,15 +208,15 @@ function edit_entries_link() {
  *
  * @param int $id Post ID.
  */
-function find_award_partner( $id ) {
+function get_associated_award( $id ) {
 
 	$output = array();
 
 	$partner_args = array(
-		'post_type'  => 'tm-events-partners',
+		'post_type'  => 'tm-events-awards',
 		'meta_query' => array(
 			array(
-				'key' => '_tm_events_partners_associated_award',
+				'key' => '_tm_events_awards_associated_partner',
 				'value' => intval( $id ),
 				'compare' => '=',
 			),
@@ -228,6 +228,24 @@ function find_award_partner( $id ) {
 		array_push( $output, $value->ID );
 	}
 	return $output;
+
+}
+
+/**
+ * Join associated award titles
+ *
+ * @param  string|array $associated_award Array of post ids.
+ * @return string                   Text string of awards titles with commas when required.
+ */
+function the_associated_award( $associated_award ) {
+
+	$content = array();
+
+	foreach ( $associated_award as $key => $value ) {
+		array_push( $content, get_the_title( $value ) );
+	}
+
+	return implode( ', ', $content );
 
 }
 

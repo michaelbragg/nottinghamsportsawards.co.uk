@@ -19,16 +19,13 @@
 		<section class="block__content category-item__content ss1-ss4 ls1-ls8">
 		<?php the_content(); ?>
 		</section>
-
 		<aside class="block__aside--right category-item__aside box ss1-ss4 ls9-ls12">
-		<?php foreach ( find_award_partner( get_the_ID() ) as $key => $partner_id ) : ?>
-			<?php $partner_link = get_post_meta( $partner_id, '_tm_events_partners_partner_link', true ); ?>
+		<?php foreach ( get_post_meta( get_the_ID(), '_tm_events_awards_associated_partner', false ) as $key => $partner_id ) : ?>
 
+			<?php $partner_link = get_post_meta( $partner_id, '_tm_events_partners_partner_link', true ); ?>
 			<?php if ( $partner_link ) : ?><a class="outbound link" rel="nofollow" targert="_blank" href="<?php echo esc_html( $partner_link ); ?>"><?php endif; ?>
 				<?php echo get_the_post_thumbnail( $partner_id, null, array( 'class' => 'image__responsive' ) ); ?>
 			<?php if ( $partner_link ) : ?></a><?php endif; ?>
-
-
 
 		<?php endforeach; ?>
 		</aside>

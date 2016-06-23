@@ -12,7 +12,7 @@ $profile_title = get_post_meta( get_the_ID(), '_tm_events_partners_profile_title
 $profile_image = get_post_meta( get_the_ID(), '_tm_events_partners_profile_image_id', true );
 $profile_quote = get_post_meta( get_the_ID(), '_tm_events_partners_profile_quote', true );
 $partner_link = get_post_meta( get_the_ID(), '_tm_events_partners_partner_link', true );
-$associated_award = get_post_meta( get_the_ID(), '_tm_events_partners_associated_award', true );
+$associated_award = get_associated_award( get_the_ID() );
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'block sponsors-item box grid__separator--horizontal' ); ?>>
@@ -20,9 +20,9 @@ $associated_award = get_post_meta( get_the_ID(), '_tm_events_partners_associated
 		<?php
 		if ( is_single() ) { ?>
 			<h1 class="gamma heading--main entry-title">
-		<?php the_title();
+			<?php the_title();
 			if ( ! empty( $associated_award ) ) {
-				echo '-&nbsp;' . esc_html( get_the_title( $associated_award ) );
+				echo '-&nbsp;' . esc_html( the_associated_award( $associated_award ) );
 			}?>
 			</h1>
 		<?php } else { ?>
@@ -32,7 +32,7 @@ $associated_award = get_post_meta( get_the_ID(), '_tm_events_partners_associated
 			</a>
 			<?php
 			if ( ! empty( $associated_award ) ) {
-				echo '-&nbsp;' . esc_html( get_the_title( $associated_award ) );
+				echo '-&nbsp;' . esc_html( the_associated_award( $associated_award ) );
 			} ?>
 			</h2>
 		<?php } ?>

@@ -35,13 +35,7 @@ class TM_Events_Partners {
 			array( $this, 'explain_feature_image' )
 		);
 
-		// @Todo: Check that CM2 is installed
-		add_action(
-			'cmb2_init',
-			array( $this, 'metabox_add_award' )
-		);
-
-		// @Todo: Check that CM2 is installed
+		// @Todo: Check that CM2 is installed.
 		add_action(
 			'cmb2_init',
 			array( $this, 'metabox_add_profile' )
