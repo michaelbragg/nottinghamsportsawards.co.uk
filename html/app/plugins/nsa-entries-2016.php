@@ -5,7 +5,7 @@
  * Description:
  * Author: Michael Bragg
  * Author URI:
- * Version: 0.1.0
+ * Version: 0.2.0
  *
  * @package nsa-entries-2016
  */
@@ -166,6 +166,18 @@ class NSA_Entries_2016 {
 			'placeholder'				=> __( 'eg, 0121 123 4567', 'nsa-entries-2016' ),
 			),
 		) );
+
+		$entry->add_field( array(
+			'id'								=> $this->meta_prefix . 'data_protection',
+			'name'							=> __( 'Communication', 'nsa-entries-2016' ),
+			'type'							=> 'multicheck',
+			'select_all_button'	=> false,
+			'attributes'				=> array(),
+			'options'						=> array(
+			'third_parties'			=> __( 'Local World would like to allow selected third parties to contact you. If you object to receiving third party communications please tick the checkbox.', 'nsa-entries-2016' ),
+			'publish-nomination'	=> __( 'If you would prefer that your nomination is not featured in the manner described above. please tick the checkbox.', 'nsa-entries-2016' ),
+			),
+		));
 
 		$entry->add_field( array(
 			'id'								=> $this->meta_prefix . 'hidden_check',
@@ -356,9 +368,8 @@ class NSA_Entries_2016 {
 	/**
 	 * Send out confirmation email
 	 *
-	 * @param  [type] $nominee [description].
-	 * @param  array $data    [description].
-	 * @return [type]          [description].
+	 * @param  string $nominee post title (nominee name).
+	 * @param  array  $data    Entry fields data.
 	 */
 	public function send_confirmation( $nominee, $data ) {
 
@@ -368,19 +379,31 @@ class NSA_Entries_2016 {
 			array_push( $awards, get_the_title( intval( $value ) ) );
 		}
 
-		$message    = '<strong>Nottingham Sports Awards 2016</strong><br><br>';
-		$message   .= '<strong>Nominee:</strong><br>';
-		$message   .= 'Name: ' . $nominee . '<br>';
-		$message   .= 'Email: ' . $data[ $this->meta_prefix . 'nominee_email' ] . '<br>';
-		$message   .= 'Phone: ' . $data[ $this->meta_prefix . 'nominee_phone' ] . '<br>';
-		$message   .= '<br>';
-		$message   .= 'Award: ' . implode( ', ', $awards ) . '.<br>';
-		$message   .= 'Reason: <br>' . $data[ $this->meta_prefix . 'nominee_reason' ] . '<br>';
-		$message   .= '<br>';
-		$message   .= '<strong>Nominator:</strong><br>';
-		$message   .= 'Name: ' . $data[ $this->meta_prefix . 'nominator_name' ] . '<br>';
-		$message   .= 'Email: ' . $data[ $this->meta_prefix . 'nominator_email' ] . '<br>';
-		$message   .= 'Phone: ' . $data[ $this->meta_prefix . 'nominator_phone' ] . '<br>';
+		$message  = '<strong>Nottingham Sports Awards 2016</strong><br><br>';
+		$message .= '<strong>Nominee:</strong><br>';
+		$message .= 'Name: ' . $nominee . '<br>';
+		$message .= 'Email: ' . $data[ $this->meta_prefix . 'nominee_email' ] . '<br>';
+		$message .= 'Phone: ' . $data[ $this->meta_prefix . 'nominee_phone' ] . '<br>';
+		$message .= '<br>';
+		$message .= '<strong>Award(s):</strong> <br>' . implode( ',<br>', $awards ) . '.<br>';
+		$message .= '<br>';
+		$message .= '<strong>Reason:</strong> <br>' . $data[ $this->meta_prefix . 'nominee_reason' ] . '<br>';
+		$message .= '<br>';
+		$message .= '<strong>Nominator:</strong><br>';
+		$message .= 'Name: ' . $data[ $this->meta_prefix . 'nominator_name' ] . '<br>';
+		$message .= 'Email: ' . $data[ $this->meta_prefix . 'nominator_email' ] . '<br>';
+		$message .= 'Phone: ' . $data[ $this->meta_prefix . 'nominator_phone' ] . '<br>';
+		$message .= '<br>';
+		if ( in_array( 'third_parties', $data[ $this->meta_prefix . 'data_protection' ], true ) ) {
+			$message .= 'Allow third party contact: Yes<br>';
+		} else {
+			$message .= 'Allow third party contact: No<br>';
+		}
+		if ( in_array( 'publish-nomination', $data[ $this->meta_prefix . 'data_protection' ], true ) ) {
+			$message .= 'Allow featured nomination: Yes<br>';
+		} else {
+			$message .= 'Allow featured nomination: No<br>';
+		}
 
 		$headers = array(
 			"From: Nottingham Sports Awards <no.reply@nottinghamsportsawards.co.uk>\r\n",
