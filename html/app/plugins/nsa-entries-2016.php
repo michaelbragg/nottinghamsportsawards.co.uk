@@ -174,7 +174,7 @@ class NSA_Entries_2016 {
 			'select_all_button'	=> false,
 			'attributes'				=> array(),
 			'options'						=> array(
-			'third_parties'			=> __( 'Local World would like to allow selected third parties to contact you. If you object to receiving third party communications please tick the checkbox.', 'nsa-entries-2016' ),
+			'third_parties'			=> __( 'Trinity Mirror would like to allow selected third parties to contact you. If you object to receiving third party communications please tick the checkbox.', 'nsa-entries-2016' ),
 			'publish-nomination'	=> __( 'If you would prefer that your nomination is not featured in the manner described above. please tick the checkbox.', 'nsa-entries-2016' ),
 			),
 		));
