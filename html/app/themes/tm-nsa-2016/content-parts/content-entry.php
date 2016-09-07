@@ -36,7 +36,7 @@ $entry_status = ( get_query_var( 'status' ) === 'saved' ? true : false );
 <?php
 
 echo '<form class="cmb-form" method="post" id="entries-form" enctype="multipart/form-data">
-			<input type="hidden" name="object_id" value="'. esc_attr( $object_id ) .'">';
+			<input type="hidden" name="object_id" value="' . esc_attr( $object_id ) . '">';
 
 $args = array(
 	'form_format' => '%3$s',

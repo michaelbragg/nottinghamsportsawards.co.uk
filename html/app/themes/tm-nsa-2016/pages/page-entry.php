@@ -5,14 +5,6 @@
  * @package tm-nsa-2016
  */
 
-/**
- * Check user is logged in
-if ( ! is_user_logged_in() ) {
-	wp_redirect( home_url( $path = 'login' ) );
-	exit;
-}
- */
-
 $entry = get_query_var( 'entry' );
 $object_id = ( get_query_var( 'entry' ) !== '' ? $entry : 0 );
 // Check if the login failed.
@@ -24,9 +16,9 @@ get_currentuserinfo();
 
 if ( get_post_field( 'post_author', $object_id ) !== $current_user->ID  && ( 0 !== $object_id ) ) {
 		remove_query_arg( 'entry' );
-		wp_redirect( home_url( $path = 'nominate/entry' ) );
+		wp_safe_redirect( home_url( $path = 'nominate/entry' ) );
+		exit();
 }
-
 
 get_header(); ?>
 
@@ -58,7 +50,7 @@ get_header(); ?>
 	<?php
 
 	echo '<form class="cmb-form" method="post" id="entries-form" enctype="multipart/form-data">
-				<input type="hidden" name="object_id" value="'. esc_attr( $object_id ) .'">';
+				<input type="hidden" name="object_id" value="' . esc_attr( $object_id ) . '">';
 
 	$args = array(
 		'form_format' => '%3$s',
