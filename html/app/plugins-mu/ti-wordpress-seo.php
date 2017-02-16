@@ -1,123 +1,109 @@
 <?php
 /**
  * Plugin Name: TI WordPress SEO
- * Plugin URI:
- * Description: Update default functionality of WordPress SEO plugin
+ * Plugin URI: https://github.com/thoughtsideas/ti-wordpress-seo/
+ * Description: Tweak WordPress SEO plugin for simplicity.
  * Author: Michael Bragg <michael@michaelbragg.net>
  * Version: 0.1.0
-*/
+ */
 
 
 class TI_WordPress_SEO {
 
 	/**
-	 * Maintain the single instance of TI_WordPress_SEO
+	 * Current version number
 	 *
-	 * @var bool
+	 * @since 0.1.0
+	 * @var   string
 	 */
-	private static $instance = false;
-
-	protected $user;
+	const VERSION = '0.1.0';
 
 	/**
-	 * Add required hooks
+	 * Hold class instance.
+	 *
+	 * @since 0.1.0
+	 * @access protected
+	 * @var TI_WordPress_SEO
 	 */
-	function __construct() {
+	protected static $instance;
 
-		// Get current users details
-		add_action(
-			'init',
-			array( $this, 'ti_get_user' )
-		);
+	/**
+	 * Store this users data
+	 *
+	 * @since 0.1.0
+	 * @access protected
+	 * @var array
+	 */
+	protected static $user;
 
-		// Run actions once WordPress has initialized
-		add_action(
-			'init',
-			array( $this, 'ti_init' )
-		);
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1.0
+	 */
+	public function __construct() {
+
+		self::$user = $this->get_user();
 
 	}
 
 	/**
-	 * Handle requests for the instance.
+	 * Get class instance.
 	 *
 	 * @since 0.1.0
-	 * @return bool
+	 * @return TI_WordPress_SEO
 	 */
-	public static function get_instance() {
-		if ( ! self::$instance ) {
+	public static function has_instance() {
+
+		if ( null === self::$instance ) {
 			self::$instance = new TI_WordPress_SEO();
 		}
+
 		return self::$instance;
+
 	}
 
 	/**
 	 * Get current users details
+	 *
 	 * @since 0.1.0
 	 */
+	protected static function get_user() {
 
-	public function ti_get_user() {
-		// Get an instance of the current user
+		/** Get current user's ID. */
 		$user_id = wp_get_current_user()->ID;
 		$current_user = new WP_User( $user_id );
-		// Set protected variable
-		$this->user = $current_user;
+
+		/** Set the users details for use later. */
+		return $current_user;
+
 	}
 
 	/**
 	 * Check users capabilities
+	 *
 	 * @since 0.1.0
+	 * @param string $capability User capability to check against.
+	 * @return boolean             If the user has this capability.
 	 */
-	public function ti_has_user_capability( $capability ) {
-		if ( $this->user->has_cap( $capability ) ) {
+	public function has_user_capability( $capability ) {
+
+		if ( self::$user->has_cap( $capability ) ) {
 			return true;
 		}
+
 		return false;
+
 	}
 
 	/**
-	 * Hooks to run on WordPress initialization
+	 * Changes the SEO metbox priority for post types
+	 *
 	 * @since 0.1.0
+	 * @uses wp_dashboard_setup
 	 */
-	public function ti_init() {
-
-		// For all users
-		add_action(
-			'wp_before_admin_bar_render',
-			array( $this, 'ti_admin_bar_seo_cleanup' )
-		);
-
-		add_action(
-			'wp_dashboard_setup',
-			array( $this, 'ti_remove_dashboard_widgets' )
-		);
-
-		/* If user is Author or below */
-		if ( ! $this->ti_has_user_capability( 'publish_pages' ) ) {
-
-			add_filter(
-				'wpseo_metabox_prio',
-				array( $this, 'ti_set_metabox_context' )
-			);
-
-			add_action(
-				'add_meta_boxes',
-				array( $this, 'ti_remove_yoast_metabox' ),
-				99
-			);
-
-			add_filter(
-				'manage_edit-post_columns',
-				array( $this, 'ti_remove_yoast_columns' )
-			);
-
-			add_filter(
-				'manage_edit-page_columns',
-				array( $this, 'ti_remove_yoast_columns' )
-			);
-
-		}
-
+	public function change_metabox_priority() {
+		return 'low';
 	}
 
 	/**
@@ -126,7 +112,7 @@ class TI_WordPress_SEO {
 	 * @since 0.1.0
 	 * @uses remove_menu
 	 */
-	public function ti_admin_bar_seo_cleanup() {
+	public static function remove_admin_bar_seo() {
 
 		global $wp_admin_bar;
 		$wp_admin_bar->remove_menu( 'wpseo-menu' );
@@ -139,20 +125,38 @@ class TI_WordPress_SEO {
 	 *  @since 0.1.0
 	 *  @uses  remove_meta_box
 	 */
-	public function ti_remove_dashboard_widgets() {
+	public static function remove_dashboard_widgets() {
 
-		global $wp_meta_boxes;
 		remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'side' );
 
 	}
 
 	/**
-	 * Removes the WordPress SEO meta box from `$post_types`
+	 * Removes the extra columns on the post/page listing screens.
 	 *
 	 * @since 0.1.0
-	 * @uses remove_meta_box()
+	 * @uses manage_edit-post_columns
 	 */
-	public function ti_remove_yoast_metabox() {
+	public static function remove_columns( $columns ) {
+
+	  unset( $columns['wpseo-score'] );
+	  unset( $columns['wpseo-title'] );
+	  unset( $columns['wpseo-metadesc'] );
+	  unset( $columns['wpseo-focuskw'] );
+		unset( $columns['wpseo-score-readability']);
+
+	  return $columns;
+
+	}
+
+	/**
+	 * Removes a meta box or any other element from a particular post edit screen
+	 * of a given post type.
+	 *
+	 * @since 0.1.0
+	 * @uses add_meta_boxes
+	 */
+	public function remove_metabox() {
 
 		$post_types = get_post_types();
 
@@ -163,37 +167,82 @@ class TI_WordPress_SEO {
 	}
 
 	/**
-	 * Removes the extra columns on the post/page listing screens.
+	 * Remove SEO Score from post view.
 	 *
 	 * @since 0.1.0
+	 * @uses admin_head
 	 */
-	public function ti_remove_yoast_columns( $columns ) {
+	public function remove_seo_score() {
 
-		unset( $columns['wpseo-score'] );
-		unset( $columns['wpseo-title'] );
-		unset( $columns['wpseo-metadesc'] );
-		unset( $columns['wpseo-focuskw'] );
+		$css = '<style>#keyword-score { display: none; }</style>';
 
-		return $columns;
+		echo $css;
+		wp_add_inline_style( 'remove-seo-score', $css );
 
-	}
-
-	/**
-	 * Reset the Yoast SEO metabox context
-	 *
-	 * @since 0.1.0
-	 */
-	public function ti_set_metabox_context() {
-		// Accepts 'high', 'default', 'low'. Default is 'high'.
-		return 'low';
 	}
 
 }
 
 function ti_wordpress_seo_init() {
-	if ( class_exists( 'WPSEO_Admin' ) ) {
-		TI_WordPress_SEO::get_instance();
+
+	/** Check WordPress SEO plugin is installed. */
+	if( ! class_exists( 'WPSEO_Admin' ) ) {
+
+		/** Stop the plugin running. Don't waste time running unnecessary code. */
+		return false;
+
 	}
+
+	$ti_wpseo	= new TI_WordPress_SEO();
+
+	$ti_wpseo::has_instance();
+
+	add_filter(
+		'wpseo_metabox_prio',
+		array( $ti_wpseo, 'change_metabox_priority' )
+	);
+
+	add_action(
+		'wp_before_admin_bar_render',
+		array( $ti_wpseo, 'remove_admin_bar_seo' )
+	);
+
+	/** Check if user is Administrator. */
+	if ( $ti_wpseo->has_user_capability( 'manage_options' ) ) {
+
+	}
+
+	/** Check if user is less than Administrator. */
+	if ( ! $ti_wpseo->has_user_capability( 'manage_options' ) ) {
+
+	}
+
+	/** Check if user is less that Editor. */
+	if ( ! $ti_wpseo->has_user_capability( 'edit_pages' ) ) {
+
+		add_action(
+			'wp_dashboard_setup',
+			array( $ti_wpseo, 'remove_dashboard_widgets' )
+		);
+
+		add_filter(
+			'manage_edit-post_columns',
+			array( $ti_wpseo, 'remove_columns' )
+		);
+
+		add_action(
+			'add_meta_boxes',
+			array( $ti_wpseo, 'remove_metabox' ),
+			11
+		);
+
+		add_action(
+			'admin_head',
+			array( $ti_wpseo, 'remove_seo_score' )
+		);
+
+	}
+
 }
 
 add_action( 'plugins_loaded', 'ti_wordpress_seo_init' );
